@@ -1,1 +1,1 @@
-# swagger-lugins-odesajs-21
+# swagger-plugins-odesajs-21

@@ -1,0 +1,65 @@
+openapi: 3.0.2
+info:
+  title: OdessaJs
+  description: Easily googled swagger.yaml
+  termsOfService: 'https://odessajs.org/'
+
+  version: v1.0.0
+servers:
+  - url: 'http://localhost:3000'
+    description: Root server
+    variables:
+      projectName:
+        enum:
+          - test-project
+          - google-test
+        default: test-project
+        description: set project
+paths:
+  /user:
+    get:
+      description: Get User
+      responses:
+        '200':
+          description: Just gets list of users
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    example: 61798c29-d0e3-472f-91dd-db912e602249
+                    type: string
+                  name:
+                    example: Babich
+                    type: string
+                type: object
+      tags:
+        - users
+  '/user/{id}':
+    get:
+      description: Retrieves user by id
+      parameters:
+        - name: id
+          in: path
+          description: user id in uuid format
+          required: true
+          allowEmptyValue: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Requested user data
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    example: 61798c29-d0e3-472f-91dd-db912e602249
+                    type: string
+                  name:
+                    example: Babich
+                    type: string
+                type: object
+      tags:
+        - users

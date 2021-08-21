@@ -1,0 +1,69 @@
+openapi: 3.0.2
+info:
+  title: OdessaJs
+  description: Easily googled swagger.yaml
+  termsOfService: https://policies.google.com/terms
+  version: v1.0.0
+servers:
+- url: http://localhost:3000
+  description: Root server
+  variables:
+    projectName:
+      description: set project
+      default: test-project
+      enum:
+      - test-project
+      - google-test
+paths:
+  /user:
+    get:
+      tags:
+      - users
+      description: Get User
+      operationId: userGET
+      responses:
+        "200":
+          description: Just gets list of users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+      x-swagger-router-controller: Users
+  /user/{id}:
+    get:
+      tags:
+      - users
+      description: Retrieves user by id
+      operationId: userIdGET
+      parameters:
+      - name: id
+        in: path
+        description: user id in uuid format
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Requested user data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+      x-swagger-router-controller: Users
+components:
+  schemas:
+    inline_response_200:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 61798c29-d0e3-472f-91dd-db912e602249
+        name:
+          type: string
+          example: Babich
+      example:
+        name: Babich
+        id: 61798c29-d0e3-472f-91dd-db912e602249
